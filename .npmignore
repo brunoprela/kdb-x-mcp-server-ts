@@ -1,0 +1,47 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Development files
+tsconfig.json
+.eslintrc.json
+.prettierrc
+.gitignore
+.npmignore
+
+# Python reference implementation
+kdb-x-mcp-server/
+
+# Development dependencies
+node_modules/
+package-lock.json
+
+# Build artifacts (only dist/ should be published)
+*.tsbuildinfo
+*.log
+
+# Environment files
+.env
+.env.*
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+coverage/
+.nyc_output/
+*.test.ts
+*.spec.ts
+
+# Documentation (keep README and LICENSE)
+docs/
+

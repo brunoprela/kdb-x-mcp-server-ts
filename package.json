@@ -1,0 +1,70 @@
+{
+    "name": "@kxsystems/kdb-x-mcp-server-ts",
+    "version": "0.1.0",
+    "description": "MCP server for KDB-X - TypeScript implementation. Enables natural language interaction with KDB-X databases through Model Context Protocol.",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "bin": {
+        "kdbx-mcp-server": "./dist/cli.js"
+    },
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsx watch src/cli.ts",
+        "start": "node dist/cli.js",
+        "lint": "eslint src --ext .ts",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "type-check": "tsc --noEmit",
+        "prepublishOnly": "npm run build"
+    },
+    "keywords": [
+        "mcp",
+        "model-context-protocol",
+        "kdb-x",
+        "kdb",
+        "kdb+",
+        "typescript",
+        "mcp-server",
+        "claude",
+        "ai",
+        "database",
+        "timeseries"
+    ],
+    "author": "Kx Systems",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/KxSystems/kdb-x-mcp-server-ts.git"
+    },
+    "bugs": {
+        "url": "https://github.com/KxSystems/kdb-x-mcp-server-ts/issues"
+    },
+    "homepage": "https://github.com/KxSystems/kdb-x-mcp-server-ts#readme",
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.0.4",
+        "commander": "^12.1.0",
+        "dotenv": "^16.4.7",
+        "winston": "^3.17.0",
+        "zod": "^3.24.1",
+        "openai": "^4.76.1",
+        "@xenova/transformers": "^2.17.2",
+        "csv-parse": "^5.5.7"
+    },
+    "devDependencies": {
+        "@types/node": "^22.10.5",
+        "@typescript-eslint/eslint-plugin": "^8.18.1",
+        "@typescript-eslint/parser": "^8.18.1",
+        "eslint": "^9.18.0",
+        "prettier": "^3.4.2",
+        "tsx": "^4.19.2",
+        "typescript": "^5.7.2"
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    }
+}

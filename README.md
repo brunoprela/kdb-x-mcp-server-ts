@@ -137,6 +137,8 @@ const server = new KdbxMcpServer(config, logger);
 await server.start();
 ```
 
+**Note for Next.js users**: If you're using this package in a Next.js application, see the [Next.js Compatibility](#nextjs-compatibility) section below for required configuration.
+
 ### Running from Source
 
 If you cloned the repository:
@@ -409,6 +411,45 @@ npm run format
 
 - Change the port using `--mcp.port` or `KDBX_MCP_PORT`
 - Stop the service using the port
+
+### Next.js Compatibility
+
+If you're using this package in a Next.js application, you may encounter webpack errors related to `onnxruntime-node` (a native module dependency of `@xenova/transformers`). This is because webpack tries to bundle native `.node` files, which is not supported.
+
+**Solution**: Configure Next.js to exclude these native modules from webpack bundling. Add the following to your `next.config.js`:
+
+```javascript
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  webpack: (config, { isServer }) => {
+    // Exclude native modules from webpack bundling
+    if (isServer) {
+      config.externals = config.externals || [];
+      config.externals.push({
+        'onnxruntime-node': 'commonjs onnxruntime-node',
+        '@xenova/transformers': 'commonjs @xenova/transformers',
+      });
+    }
+    
+    // Ignore .node files
+    config.module = config.module || {};
+    config.module.rules = config.module.rules || [];
+    config.module.rules.push({
+      test: /\.node$/,
+      use: 'node-loader',
+    });
+
+    return config;
+  },
+};
+
+module.exports = nextConfig;
+```
+
+**Important Notes**:
+- The `@xenova/transformers` package (used for SentenceTransformers embeddings) should only be used in server-side code (API routes, Server Components, or server actions)
+- If you're using the embedding features, ensure they're only called from server-side code
+- Consider using the OpenAI provider instead if you need client-side compatibility
 
 ## License
 

@@ -4,4 +4,5 @@ export * from './utils/logging.js';
 
 // Re-export for convenience
 export { KdbxMcpServer } from './server.js';
+export { setupLogging } from './utils/logging.js';
 

@@ -1,6 +1,14 @@
 # KDB-X MCP Server (TypeScript)
 
+[![npm version](https://img.shields.io/npm/v/kdb-x-mcp-server-ts.svg)](https://www.npmjs.com/package/kdb-x-mcp-server-ts)
+[![npm license](https://img.shields.io/npm/l/kdb-x-mcp-server-ts.svg)](https://www.npmjs.com/package/kdb-x-mcp-server-ts)
+
 This is a TypeScript implementation of the KDB-X MCP Server that enables end users to query KDB-X data through natural language, providing production-grade resources, prompts, and tools for seamless data interaction.
+
+**This package is publicly available on npm** and can be installed with:
+```bash
+npm install kdb-x-mcp-server-ts
+```
 
 Built on an extensible framework with configurable templates, it allows for intuitive extension with custom integrations tailored to your specific needs.
 
@@ -27,9 +35,33 @@ The server leverages a combination of curated resources, intelligent prompts, an
 
 ## Installation
 
+### Install from npm (Recommended)
+
+This package is publicly available on npm and can be installed directly:
+
+```bash
+npm install kdb-x-mcp-server-ts
+```
+
+After installation, you can use the CLI command:
+
+```bash
+kdbx-mcp-server
+```
+
+Or import it in your TypeScript/JavaScript project:
+
+```typescript
+import { KdbxMcpServer } from 'kdb-x-mcp-server-ts';
+```
+
+### Install from Source
+
+Alternatively, you can clone and build from source:
+
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/KxSystems/kdb-x-mcp-server-ts.git
 cd kdb-x-mcp-server-ts
 
 # Install dependencies
@@ -70,7 +102,44 @@ Configuration can be provided via:
 
 ## Usage
 
-### Running the Server
+### Using the CLI (After npm install)
+
+If you installed the package from npm, you can use the CLI command directly:
+
+```bash
+# Using defaults
+kdbx-mcp-server
+
+# Using environment variables
+export KDBX_MCP_PORT=7001
+export KDBX_DB_RETRY=4
+kdbx-mcp-server
+
+# Using command line arguments
+kdbx-mcp-server --mcp.port 7001 --db.retry 4
+```
+
+### Using as a Library
+
+You can also import and use the server programmatically in your TypeScript/JavaScript project:
+
+```typescript
+import { KdbxMcpServer, loadAppSettings, setupLogging } from 'kdb-x-mcp-server-ts';
+
+// Load configuration
+const config = loadAppSettings();
+
+// Setup logging
+const logger = setupLogging(config.mcp.logLevel);
+
+// Create and start the server
+const server = new KdbxMcpServer(config, logger);
+await server.start();
+```
+
+### Running from Source
+
+If you cloned the repository:
 
 ```bash
 # Using defaults
@@ -88,7 +157,7 @@ npm start -- --mcp.port 7001 --db.retry 4
 ### Development Mode
 
 ```bash
-# Run with hot reload
+# Run with hot reload (from source)
 npm run dev
 ```
 
